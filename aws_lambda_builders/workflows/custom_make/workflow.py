@@ -46,14 +46,14 @@ class CustomMakeWorkflow(BaseWorkflow):
 
         make_action = CustomMakeAction(
             artifacts_dir,
-            scratch_dir,
+            source_dir,
             manifest_path,
             osutils=self.os_utils,
             subprocess_make=subprocess_make,
             build_logical_id=build_logical_id,
         )
 
-        self.actions = [CopySourceAction(source_dir, scratch_dir, excludes=self.EXCLUDED_FILES), make_action]
+        self.actions = [make_action]
 
     def get_resolvers(self):
         return [PathResolver(runtime="provided", binary="make", executable_search_paths=self.executable_search_paths)]
